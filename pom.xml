@@ -45,12 +45,14 @@
             <version>2.1.0</version>
         </dependency>
 
+        <!-- OKHttp -->
         <dependency>
             <groupId>com.squareup.okhttp3</groupId>
             <artifactId>okhttp</artifactId>
             <version>3.14.1</version>
         </dependency>
 
+        <!-- Json fastjson会自动把下划线映射到驼峰属性 -->
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
@@ -64,8 +66,29 @@
             <scope>runtime</scope>
         </dependency>
 
+        <!-- lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.10</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!--  -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <optional>true</optional>
+        </dependency>
     </dependencies>
 
+    <!--
+        配置自动更新项目
+          1.导入如下配置
+          2.修改settings设置: 勾中Compiler的Build project automatically选项
+          3.按住Ctrl+Shift+Alt+?,进入弹出的Registry选项, 再勾中compiler.automake.allow.paralle
+          做完三步后修改代码只要Ctrl+S即可,不用重新启动项目
+    -->
     <build>
         <plugins>
             <plugin>

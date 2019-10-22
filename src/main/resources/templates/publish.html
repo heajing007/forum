@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Bootstrap Template</title>
+    <!--视口/视觉窗口标签:meta, 宽度=设备宽度，初始化缩放比例1， 是否允许用户缩放页面:no -->
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
+    <!-- 扩展对低版本IE支持,开启IE兼容模式-->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Bootstrap核心css -->
+    <link rel="stylesheet" type="text/css" href="/bootstrap3/css/bootstrap.css">
+    <!-- 字体图标 -->
+    <link rel="stylesheet" type="text/css" href="/bootstrap3/font-awesome-4.7.0/css/font-awesome.css"/>
+    <link rel="stylesheet" type="text/css" href="/bootstrap3/css/forum.css">
+</head>
+<body>
+<div th:insert="navigation :: nav"></div>
+
+
+<div class="container-fluid main">
+    <div class="row">
+        <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12" id="left">
+            <h2><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> 发起</h2>
+            <hr>
+
+            <form action="/publish" method="post">
+                <div class="form-group">
+                    <label for="title">问题标题(简单扼要)</label>
+                    <input type="text" class="form-control" th:value="${title}" id="title" name="title" placeholder="问题标题">
+                </div>
+
+                <div class="form-group">
+                    <label for="description">问题补充(必填,请参照右侧提示)</label>
+                    <textarea class="form-control" th:text="${description}" id="description" name="description" cols="30" rows="10"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="tag">添加标签</label>
+                    <input type="text" class="form-control" th:value="${tag}" id="tag" name="tag" placeholder="输入标签,以逗号(,)分隔">
+                </div>
+
+
+                <div class="alert alert-danger"  th:text="${error}" th:if="${error !=null}"></div>
+                <button type="submit" class="btn btn-success btn-publish">发布</button>
+
+            </form>
+        </div>
+
+        <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+            <h3>问题发起指南</h3>
+            • 问题标题: 请用精简的语言描述您发布的问题，不超过25字<br>
+            • 问题补充: 详细补充您的问题内容，并确保问题描述清晰直观, 并提供一些相关的资料：<br>
+            • 选择标签: 选择一个或者多个合适的标签，用逗号隔开, 每个标签不超过十个字
+        </div>
+    </div>
+</div>
+
+
+
+</body>
+<!-- jQuery 1.12.4 依赖 -->
+<script type="text/javascript" src="/bootstrap3/jquery.min.js"></script>
+<!-- Bootstrap核心js -->
+<script type="text/javascript" src="/bootstrap3/js/bootstrap.js"></script>
+<!-- 图片占位，解决低版本IE不支持圆角的问题-->
+<script type="text/javascript" src="/bootstrap3/js/holder.js"></script>
+<!-- 引入T5和C3的js函数库，支持旧版浏览器-->
+<script type="text/javascript" src="/bootstrap3/js/html5shiv.min.js"></script>
+<script type="text/javascript" src="/bootstrap3/js/css3-mediaqueries.js"></script>
+<script type="text/javascript" src="/bootstrap3/js/respond.min.js"></script>
+
+</html>

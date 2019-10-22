@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Bootstrap Template</title>
+    <title th:text="${sectionName}"></title>
     <!--视口/视觉窗口标签:meta, 宽度=设备宽度，初始化缩放比例1， 是否允许用户缩放页面:no -->
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
     <!-- 扩展对低版本IE支持,开启IE兼容模式-->
@@ -15,16 +15,14 @@
 </head>
 <body>
 <div th:insert="navigation :: nav"></div>
-
-
-<div class="container-fluid main">
+<div class="container-fluid main profile">
     <div class="row">
         <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12" id="left">
-            <h2><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span> 发现</h2>
+            <h2><span th:text="${sectionName}"></span></h2>
             <hr>
 
-
-            <div class="media content2" th:each="prod : ${pagination.questions}">
+            <div th:if="${action == 'questions'}">
+            <div class="media" th:each="prod : ${pagination.questions}">
                 <div class="media-left content1">
                     <a href="#">
                         <img class="media-object img-circle" th:src="${prod.user.avatar_url}" alt="">
@@ -32,43 +30,39 @@
 
                 </div>
                 <div class="media-body content1">
-
-                    <h4 class="media-heading">
-                        <a th:href="@{'question/'+ ${prod.id}}" th:text="${prod.title}"></a>
-                    </h4>
-
-                    <span th:text="${prod.description}"></span><br>
+                    <h4 class="media-heading" th:text="${prod.title}">快速学习</h4>
+                    <span th:text="${prod.description}">深刻搭街坊空手道解放了就是砥砺奋进</span><br>
                     <span id="text_desc"><span th:text="${prod.getComment_count()}"></span></spqn>个回复 • <span th:text="${prod.view_count}"></span>次浏览 • <span th:text="${#dates.format(prod.gmt_create,'yyyy-MM-dd HH:mm:ss')}"></span>发布</span>
                 </div>
             </div>
 
-            <div>
+
                 <nav aria-label="Page navigation">
                     <ul class="pagination">
                         <li th:if="${pagination.showFirstPage}">
-                            <a th:href="@{/(page='1')}">
+                            <a th:href="@{/profile/questions(page='1')}">
                                 <span aria-hidden="true">&laquo;</span>
                             </a>
                         </li>
                         <li th:if="${pagination.showPrevious}">
-                            <a th:href="@{/(page=${pagination.page}-1)}">
+                            <a th:href="@{/profile/questions(page=${pagination.page}-1)}">
                                 <span aria-hidden="true">&lt;</span>
                             </a>
                         </li>
 
                         <li th:each="page : ${pagination.pages}" th:class="${pagination.page == page}?'active':''">
-                            <a th:href="@{/(page=${page})}" th:text="${page}"></a>
+                            <a th:href="@{/profile/questions(page=${page})}" th:text="${page}"></a>
                         </li>
 
 
                         <li th:if="${pagination.showNext}">
-                            <a th:href="@{/(page=${pagination.page}+1)}">
+                            <a th:href="@{/profile/questions(page=${pagination.page}+1)}">
                                 <span aria-hidden="true">&gt;</span>
                             </a>
                         </li>
 
                         <li th:if="${pagination.showEndPage}">
-                            <a th:href="@{/(page=${pagination.totalPage})}">
+                            <a th:href="@{/profile/questions(page=${pagination.totalPage})}">
                                 <span aria-hidden="true">&raquo;</span>
                             </a>
                         </li>
@@ -79,16 +73,19 @@
 
 
 
-
         </div>
 
         <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
-            <h3>热门话题</h3>
+            <div class="list-group section" style="margin-top: 20px">
+                <a href="/profile/questions" th:class="${action=='questions'}?'active list-group-item':'list-group-item'">我的问题</a>
+                <a href="/profile/replies" th:class="${action=='replies'}?'active list-group-item':'list-group-item'">最新回复 <span class="badge">14</span></a>
+                <a href="#" class="list-group-item">Morbi leo risus</a>
+                <a href="#" class="list-group-item">Porta ac consectetur ac</a>
+                <a href="#" class="list-group-item">Vestibulum at eros</a>
+            </div>
         </div>
     </div>
 </div>
-
-
 </body>
 <!-- jQuery 1.12.4 依赖 -->
 <script type="text/javascript" src="/bootstrap3/jquery.min.js"></script>

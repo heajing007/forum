@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${question.title}"></title>
+    <!--视口/视觉窗口标签:meta, 宽度=设备宽度，初始化缩放比例1， 是否允许用户缩放页面:no -->
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
+    <!-- 扩展对低版本IE支持,开启IE兼容模式-->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Bootstrap核心css -->
+    <link rel="stylesheet" type="text/css" href="/bootstrap3/css/bootstrap.css">
+    <!-- 字体图标 -->
+    <link rel="stylesheet" type="text/css" href="/bootstrap3/font-awesome-4.7.0/css/font-awesome.css"/>
+    <link rel="stylesheet" type="text/css" href="/bootstrap3/css/forum.css">
+</head>
+<body>
+<div th:insert="navigation :: nav"></div>
+<div class="container-fluid main profile">
+    <div class="row">
+        <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12" id="left">
+            <h3><span th:text="${question.title}"></span></h3>
+            <span id="text_desc">
+                作者: <span th:text="${question.user.name}"></span> |
+                发布时间: <span th:text="${#dates.format(question.gmt_create,'yyyy-MM-dd HH:mm:ss')}"></span> |
+                阅读数: <span th:text="${question.view_count}"></span>
+            </span>
+            <hr>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" th:text="${question.description}"></div><br>
+            <hr>
+            <a th:if="${session.user != null && session.user.id == question.creator}" th:href="@{'/publish/'+${question.id}}" class="forum-menu">
+                <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>编辑
+            </a>
+        </div>
+
+        <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <h3>发起人:</h3>
+                <div class="media content2">
+                    <div class="media-left content1">
+                        <a href="#">
+                            <img class="media-object img-rounded" th:src="${question.user.avatar_url}" alt="" style="width: 40px">
+                        </a>
+                    </div>
+                    <div class="media-body content1">
+                        <h4 class="media-heading">
+                            <span th:text="${question.user.name}"></span>
+                        </h4>
+                    </div>
+                </div>
+            </div>
+            <span style="color: white;">.</span>
+            <hr>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <h3>相关问题</h3>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<!-- jQuery 1.12.4 依赖 -->
+<script type="text/javascript" src="/bootstrap3/jquery.min.js"></script>
+<!-- Bootstrap核心js -->
+<script type="text/javascript" src="/bootstrap3/js/bootstrap.js"></script>
+<!-- 图片占位，解决低版本IE不支持圆角的问题-->
+<script type="text/javascript" src="/bootstrap3/js/holder.js"></script>
+<!-- 引入T5和C3的js函数库，支持旧版浏览器-->
+<script type="text/javascript" src="/bootstrap3/js/html5shiv.min.js"></script>
+<script type="text/javascript" src="/bootstrap3/js/css3-mediaqueries.js"></script>
+<script type="text/javascript" src="/bootstrap3/js/respond.min.js"></script>
+</html>

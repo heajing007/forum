@@ -1,0 +1,31 @@
+body{
+     background-color: #efefef;
+ }
+.main{
+    margin: 30px 50px;
+    background-color: #ffffff;
+}
+.btn-publish{
+    float: right;
+    margin-bottom: 25px;
+}
+.content1{
+    display: inline-block;
+}
+.content1 a img{
+    width: 65px;
+}
+#text_desc{
+    font-size: 12px;
+    font-weight: normal;
+    color: #999;
+}
+#left{
+    border: 1px solid #efefef;
+}
+.content2{
+    margin-left: 30px;
+}
+.forum-menu{
+    color: #999;
+}
